@@ -1,35 +1,48 @@
-sudo: required
+dist: trusty
+# sudo: required
 
-services:
-  - docker
+# services:
+#   - docker
 
 language: cpp
 
-env:
-  global:
-    - COMPOSE_VERSION: 1.22.0
-    - CONTAINER_RELEASE_IMAGE: bitbots/bitbots-common:$TRAVIS_BRANCH
-    - secure: c2jXdHRsHBUvKZQ1U7rWLyJWQsyrO1awXI9MhnTdSHW4IzoyoFFdohGgGZ3/DDePrQ1R63NAShHxW35wPuxMS7Qk89x0xraCAI3XEDo6P4r9FGRXXaF1njCWuDbSZY4UM8ON6AYlrrMd2vOeLXMiDwMIkU8jCg6o10Z4l3wi8YjAe5zTKBfP7Re/oj4ORlnLJ0h2C7FWQHeOpfb57ppeq+g7G4UkKW7jTxUT/W3BtDXQE/jtlt77FejEhLhk5ls04VccY+RkBZtCBf1QzC2n59leiJ8k5krPXus+qvmnXrnuxZWskdMtw7Cx3oGxL+nqQTkDDptXZGjDPL3HwViefWBm+A+Y0b7sUMqFQVKCxWGc3s373DqYUm2tkykKMu3TMSS39toODyeKQiKoGMJXKNdZ04N3K/Seg3QugcCKM0QDdLGxnhmXck2Ft1+5p+kD0e5L2m61/teINKUb8zOvVzrNbH19Bw2gkN0GzT64CM60hfk1GX11AATc68S+p+LIOM9m1c/OvgEu1eI5FuRHfeEG6o7nZsxtNgCwFWnErqasT4ZvSN5CH14yNCJR+g28qBNdPnCfK5apswzTOZx4iKpkVm1hQg/aknYYBk7RhM0C3hdAXHUJU9Hp7O2s6I9fYcantd4OwsB9lSmiUt6bU5dHZM0cYWWl5L7S1samAfA=
-    - secure: ICZ4SXhZvHh7YyDwjTd5JPvrnxjjDC++uTxJF6Qk5ws77NUF8jtfZ/AAKuuo/VcrTvNP2saExBBKJZG7zP0tJvmMDvDQ9Ci3sIpE1Bth3L9i3NzgfiNZoZZFiloYYwnbMIzH09uwQp4Yp+e+Wb9ocGCBD9k2OTESZkEBq24MBW7lLH0PmlcQLbjg/13Kj0TVhGwfByZPf3DkNhTnG8KnJZ94bz9hasSVnVdC4GOPWk3OCfKck4y09rVAXRnD4QxBfpdEnsDgfNSeb0WGpITkiIDNY7kLYL0pW70o/KoyI9AkgsOjjr4lWnzk+j2v/IhS3XXtd4hPJOlOHXSY/uGBtyX68GIXgyLZoAN0wvgwtv48pvNewEM+dKXtkKSV7kuchJr/eO+fy5vqXvvIpU9zWc2t/p22fLx5OL8OXnMpe/uvwu0G5B2XVC8ROSkE+KUi07kSXRSDzj3m8fp6ZgamsicoLqU29ug5EhSMtHZTHqNYz4vs0Opc66I36iZ/uRvpahEZcs7qtiL6VcsiOyoJM955R5pwDdo8viqInu1wfIGYgfU/CfB0HB26QRa+/hHZRpbnBCxH6PoX17yPNkhO0pWk/8cY+huxlvwqWb8DGkuI3XQNbfG0C00vLxJ651ykZrBV0HvilSAr8rbMYTeL4Ct3ra5nFnABCgr1lmVJy/Q=
+# env:
+#   global:
+#     - COMPOSE_VERSION: 1.22.0
+#     - CONTAINER_RELEASE_IMAGE: bitbots/bitbots-common:$TRAVIS_BRANCH
+#     - CONTAINER_TEST_IMAGE: bitbits/bitbots-common:$TRAVIS_COMMIT
+#     - secure: c2jXdHRsHBUvKZQ1U7rWLyJWQsyrO1awXI9MhnTdSHW4IzoyoFFdohGgGZ3/DDePrQ1R63NAShHxW35wPuxMS7Qk89x0xraCAI3XEDo6P4r9FGRXXaF1njCWuDbSZY4UM8ON6AYlrrMd2vOeLXMiDwMIkU8jCg6o10Z4l3wi8YjAe5zTKBfP7Re/oj4ORlnLJ0h2C7FWQHeOpfb57ppeq+g7G4UkKW7jTxUT/W3BtDXQE/jtlt77FejEhLhk5ls04VccY+RkBZtCBf1QzC2n59leiJ8k5krPXus+qvmnXrnuxZWskdMtw7Cx3oGxL+nqQTkDDptXZGjDPL3HwViefWBm+A+Y0b7sUMqFQVKCxWGc3s373DqYUm2tkykKMu3TMSS39toODyeKQiKoGMJXKNdZ04N3K/Seg3QugcCKM0QDdLGxnhmXck2Ft1+5p+kD0e5L2m61/teINKUb8zOvVzrNbH19Bw2gkN0GzT64CM60hfk1GX11AATc68S+p+LIOM9m1c/OvgEu1eI5FuRHfeEG6o7nZsxtNgCwFWnErqasT4ZvSN5CH14yNCJR+g28qBNdPnCfK5apswzTOZx4iKpkVm1hQg/aknYYBk7RhM0C3hdAXHUJU9Hp7O2s6I9fYcantd4OwsB9lSmiUt6bU5dHZM0cYWWl5L7S1samAfA=
+#     - secure: ICZ4SXhZvHh7YyDwjTd5JPvrnxjjDC++uTxJF6Qk5ws77NUF8jtfZ/AAKuuo/VcrTvNP2saExBBKJZG7zP0tJvmMDvDQ9Ci3sIpE1Bth3L9i3NzgfiNZoZZFiloYYwnbMIzH09uwQp4Yp+e+Wb9ocGCBD9k2OTESZkEBq24MBW7lLH0PmlcQLbjg/13Kj0TVhGwfByZPf3DkNhTnG8KnJZ94bz9hasSVnVdC4GOPWk3OCfKck4y09rVAXRnD4QxBfpdEnsDgfNSeb0WGpITkiIDNY7kLYL0pW70o/KoyI9AkgsOjjr4lWnzk+j2v/IhS3XXtd4hPJOlOHXSY/uGBtyX68GIXgyLZoAN0wvgwtv48pvNewEM+dKXtkKSV7kuchJr/eO+fy5vqXvvIpU9zWc2t/p22fLx5OL8OXnMpe/uvwu0G5B2XVC8ROSkE+KUi07kSXRSDzj3m8fp6ZgamsicoLqU29ug5EhSMtHZTHqNYz4vs0Opc66I36iZ/uRvpahEZcs7qtiL6VcsiOyoJM955R5pwDdo8viqInu1wfIGYgfU/CfB0HB26QRa+/hHZRpbnBCxH6PoX17yPNkhO0pWk/8cY+huxlvwqWb8DGkuI3XQNbfG0C00vLxJ651ykZrBV0HvilSAr8rbMYTeL4Ct3ra5nFnABCgr1lmVJy/Q=
+
+
+
+# Adding sonar-cloud to travis according to https://docs.travis-ci.com/user/sonarcloud/
+addons:
+  sonarcloud:
+    organization: "b-it-bots"
+    token:
+      secure: "CmAjJMA4X3/qFNUJUgxGyPNyXeR8HxFhTyXdFsO0CK03Bupi4YSJNNODou7nkZ64xzxVJtdhz2dQTP3rTBPsuPAe39F82Qwb76cToeykjtdBnMoht6SOsDCOl26Br+V/hY4KmS14RMdpCJc9bsXe629kGRvKupr2kG3+6syFX+SkhVl13C/n1PkT+otmcMWOF5qNccLJp8JBKjourXLlBbCs3O4khjGlxOrqxJnt/rvr/mcCFWG7ewilll2DeN2YMY76hQNBnUAp8iaYcV3ZRCQh140NhnP0cQkPA8z1wfH38sT+QEKfPNUzvte4D3d11ncXitCcMPVfJlQRmN74YBEoU/lEieBXwmMt9LwNusM7L8EYEnOk9JvwUH9BYAnCmSIGSwfChbJ32Q8jgFByaLmOewbKWkYwYKW6lrwaB28dtnll1TJ4GUNMst3EU3lCWmhLckANdO/XdKYPPy3BJNb2l03KtoOflGfBgK5F/YC9PdpFzZwB03onGIECsFxR5F2VoXAxeOEjOKk+07W4dqGLeF6OieUR15oGU3D6u3uGfa8plGhcsKaHeqfCLD+MkZCFWRuPkLdJEUhsjpwCmzEg+URPXhy820Pi6cbDgsMeIhtXEA/ilTVu7eZ92X0ymOVGayHZfQlzt0MGCi+UvgooEi0e9Hs1Ck/pGFiYJmI="
 
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-  - sudo chmod +x /usr/local/bin/docker-compose
-  - docker-compose -v
+  # - sudo rm /usr/local/bin/docker-compose
+  # - sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+  # - sudo chmod +x /usr/local/bin/docker-compose
+  # - docker-compose -v
+  - sonar-scanner -v
 
 script:
-  - docker-compose build travis
+  # - docker-compose build travis
+  - sonar-scanner
 
-deploy:
-  provider: script
-  script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    - docker push $CONTAINER_RELEASE_IMAGE
-  on:
-    branch: kinetic
-    branch: devel
-    tags: true
+# deploy:
+#   provider: script
+#   script:
+#     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#     - docker push $CONTAINER_RELEASE_IMAGE
+#   on:
+#     branch: kinetic
+#     branch: devel
+#     tags: true
 
 notifications:
   slack:
