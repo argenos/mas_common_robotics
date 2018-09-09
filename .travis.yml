@@ -8,6 +8,7 @@ language: cpp
 env:
   global:
     - COMPOSE_VERSION: 1.22.0
+    - CONTAINER_RELEASE_IMAGE: bitbots/bitbots-common:$TRAVIS_BRANCH
     - secure: c2jXdHRsHBUvKZQ1U7rWLyJWQsyrO1awXI9MhnTdSHW4IzoyoFFdohGgGZ3/DDePrQ1R63NAShHxW35wPuxMS7Qk89x0xraCAI3XEDo6P4r9FGRXXaF1njCWuDbSZY4UM8ON6AYlrrMd2vOeLXMiDwMIkU8jCg6o10Z4l3wi8YjAe5zTKBfP7Re/oj4ORlnLJ0h2C7FWQHeOpfb57ppeq+g7G4UkKW7jTxUT/W3BtDXQE/jtlt77FejEhLhk5ls04VccY+RkBZtCBf1QzC2n59leiJ8k5krPXus+qvmnXrnuxZWskdMtw7Cx3oGxL+nqQTkDDptXZGjDPL3HwViefWBm+A+Y0b7sUMqFQVKCxWGc3s373DqYUm2tkykKMu3TMSS39toODyeKQiKoGMJXKNdZ04N3K/Seg3QugcCKM0QDdLGxnhmXck2Ft1+5p+kD0e5L2m61/teINKUb8zOvVzrNbH19Bw2gkN0GzT64CM60hfk1GX11AATc68S+p+LIOM9m1c/OvgEu1eI5FuRHfeEG6o7nZsxtNgCwFWnErqasT4ZvSN5CH14yNCJR+g28qBNdPnCfK5apswzTOZx4iKpkVm1hQg/aknYYBk7RhM0C3hdAXHUJU9Hp7O2s6I9fYcantd4OwsB9lSmiUt6bU5dHZM0cYWWl5L7S1samAfA=
     - secure: ICZ4SXhZvHh7YyDwjTd5JPvrnxjjDC++uTxJF6Qk5ws77NUF8jtfZ/AAKuuo/VcrTvNP2saExBBKJZG7zP0tJvmMDvDQ9Ci3sIpE1Bth3L9i3NzgfiNZoZZFiloYYwnbMIzH09uwQp4Yp+e+Wb9ocGCBD9k2OTESZkEBq24MBW7lLH0PmlcQLbjg/13Kj0TVhGwfByZPf3DkNhTnG8KnJZ94bz9hasSVnVdC4GOPWk3OCfKck4y09rVAXRnD4QxBfpdEnsDgfNSeb0WGpITkiIDNY7kLYL0pW70o/KoyI9AkgsOjjr4lWnzk+j2v/IhS3XXtd4hPJOlOHXSY/uGBtyX68GIXgyLZoAN0wvgwtv48pvNewEM+dKXtkKSV7kuchJr/eO+fy5vqXvvIpU9zWc2t/p22fLx5OL8OXnMpe/uvwu0G5B2XVC8ROSkE+KUi07kSXRSDzj3m8fp6ZgamsicoLqU29ug5EhSMtHZTHqNYz4vs0Opc66I36iZ/uRvpahEZcs7qtiL6VcsiOyoJM955R5pwDdo8viqInu1wfIGYgfU/CfB0HB26QRa+/hHZRpbnBCxH6PoX17yPNkhO0pWk/8cY+huxlvwqWb8DGkuI3XQNbfG0C00vLxJ651ykZrBV0HvilSAr8rbMYTeL4Ct3ra5nFnABCgr1lmVJy/Q=
 
@@ -19,6 +20,16 @@ before_install:
 
 script:
   - docker-compose build travis
+
+deploy:
+  provider: script
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $CONTAINER_RELEASE_IMAGE
+  on:
+    branch: kinetic
+    branch: devel
+    tags: true
 
 notifications:
   slack:
